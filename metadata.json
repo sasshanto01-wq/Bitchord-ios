@@ -1,0 +1,6 @@
+{
+  "name": "BitChord iOS",
+  "description": "BitChord for iOS: An Apple Music-inspired Hi-Res lossless music player with synced dynamic lyrics, stats for nerds, equalizer, and crossfade automix.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
