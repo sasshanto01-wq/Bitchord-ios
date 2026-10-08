@@ -9,6 +9,8 @@ import {
   Disc,
   Play,
   Sparkles,
+  Download,
+  Smartphone,
 } from 'lucide-react';
 
 export const LibraryView: React.FC = () => {
@@ -19,6 +21,7 @@ export const LibraryView: React.FC = () => {
     playTrack,
     importLocalTrack,
     setActiveTab,
+    setIsDownloadModalOpen,
   } = useMusic();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -75,6 +78,28 @@ export const LibraryView: React.FC = () => {
             <FolderUp className="w-3.5 h-3.5 text-pink-400" />
             <span>Import Audio</span>
           </button>
+        </div>
+      </div>
+
+      {/* Direct iOS Install Banner */}
+      <div
+        onClick={() => setIsDownloadModalOpen(true)}
+        className="p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/15 to-rose-500/10 border border-pink-500/30 flex items-center justify-between cursor-pointer hover:bg-pink-500/25 active:scale-[0.98] transition shadow-lg"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#fa2d48] to-purple-600 flex items-center justify-center text-white shadow-md">
+            <Smartphone className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <h3 className="text-xs font-bold text-white">Direct Download for iOS</h3>
+              <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-pink-500 text-white font-bold">NEW</span>
+            </div>
+            <p className="text-[11px] text-zinc-300">Tap to install on iPhone Home Screen</p>
+          </div>
+        </div>
+        <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white">
+          <Download className="w-3.5 h-3.5" />
         </div>
       </div>
 

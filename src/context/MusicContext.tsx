@@ -13,6 +13,8 @@ interface MusicContextType {
   setActiveSheet: (sheet: 'none' | 'lyrics' | 'queue' | 'stats' | 'equalizer' | 'airplay' | 'settings') => void;
   viewMode: 'iphone' | 'fullscreen';
   setViewMode: (mode: 'iphone' | 'fullscreen') => void;
+  isDownloadModalOpen: boolean;
+  setIsDownloadModalOpen: (open: boolean) => void;
 
   // Playback
   currentTrack: Track;
@@ -89,6 +91,7 @@ export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isNowPlayingOpen, setIsNowPlayingOpen] = useState(false);
   const [activeSheet, setActiveSheet] = useState<'none' | 'lyrics' | 'queue' | 'stats' | 'equalizer' | 'airplay' | 'settings'>('none');
   const [viewMode, setViewMode] = useState<'iphone' | 'fullscreen'>('iphone');
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   const [tracks, setTracks] = useState<Track[]>(INITIAL_TRACKS);
   const [playlists] = useState<Playlist[]>(CURATED_PLAYLISTS);
@@ -391,6 +394,8 @@ export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setActiveSheet,
         viewMode,
         setViewMode,
+        isDownloadModalOpen,
+        setIsDownloadModalOpen,
         currentTrack,
         isPlaying,
         currentTime,

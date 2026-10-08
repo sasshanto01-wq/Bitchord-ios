@@ -171,6 +171,29 @@ export const MoreOptionsSheet: React.FC = () => {
           </span>
         </div>
 
+        {/* Direct Download & Install for iOS */}
+        <div
+          onClick={() => {
+            setActiveSheet('none');
+            // Open download modal
+            window.dispatchEvent(new CustomEvent('open-bitchord-download'));
+          }}
+          className="mt-4 p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/10 to-transparent border border-pink-500/30 flex items-center justify-between text-xs cursor-pointer hover:bg-pink-500/30 active:scale-[0.98] transition"
+        >
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-pink-500 text-white flex items-center justify-center shadow-md">
+              <Download className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="font-bold text-white">Direct Download & Install on iOS</p>
+              <p className="text-pink-300 text-[11px]">1-Tap Safari WebClip, Apple Profile, or GitHub</p>
+            </div>
+          </div>
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-500 text-white">
+            Get iOS App
+          </span>
+        </div>
+
         <button
           onClick={() => setActiveSheet('none')}
           className="mt-6 w-full py-3 rounded-2xl bg-white/10 hover:bg-white/15 active:scale-[0.99] text-sm font-semibold transition text-center"

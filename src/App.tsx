@@ -14,6 +14,7 @@ import { EqualizerSheet } from './components/player/EqualizerSheet';
 import { QueueSheet } from './components/player/QueueSheet';
 import { AirPlaySheet } from './components/player/AirPlaySheet';
 import { MoreOptionsSheet } from './components/player/MoreOptionsSheet';
+import { DownloadModal } from './components/download/DownloadModal';
 
 import { ListenNowView } from './components/views/ListenNowView';
 import { BrowseView } from './components/views/BrowseView';
@@ -22,7 +23,13 @@ import { LibraryView } from './components/views/LibraryView';
 import { SearchView } from './components/views/SearchView';
 
 const MainContent: React.FC = () => {
-  const { activeTab, activeSheet } = useMusic();
+  const { activeTab, activeSheet, isDownloadModalOpen, setIsDownloadModalOpen } = useMusic();
+
+  React.useEffect(() => {
+    const handler = () => setIsDownloadModalOpen(true);
+    window.addEventListener('open-bitchord-download', handler);
+    return () => window.removeEventListener('open-bitchord-download', handler);
+  }, [setIsDownloadModalOpen]);
 
   const renderActiveView = () => {
     switch (activeTab) {
@@ -61,6 +68,12 @@ const MainContent: React.FC = () => {
       {activeSheet === 'queue' && <QueueSheet />}
       {activeSheet === 'airplay' && <AirPlaySheet />}
       {activeSheet === 'settings' && <MoreOptionsSheet />}
+
+      {/* Direct iOS Download & Install Modal */}
+      <DownloadModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
+      />
     </div>
   );
 };

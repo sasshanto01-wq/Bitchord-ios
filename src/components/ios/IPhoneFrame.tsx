@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wifi, Battery, Smartphone, Maximize2, Music } from 'lucide-react';
+import { Wifi, Battery, Smartphone, Maximize2, Music, Download, Github } from 'lucide-react';
 import { useMusic } from '../../context/MusicContext';
 
 interface IPhoneFrameProps {
@@ -7,7 +7,7 @@ interface IPhoneFrameProps {
 }
 
 export const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ children }) => {
-  const { viewMode, setViewMode, isPlaying, currentTrack, setIsNowPlayingOpen } = useMusic();
+  const { viewMode, setViewMode, isPlaying, currentTrack, setIsNowPlayingOpen, setIsDownloadModalOpen } = useMusic();
   const [time, setTime] = useState('9:41');
 
   useEffect(() => {
@@ -27,8 +27,17 @@ export const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ children }) => {
   if (viewMode === 'fullscreen') {
     return (
       <div className="min-h-screen w-full bg-black text-white flex flex-col relative select-none">
-        {/* Floating toggle for view mode */}
+        {/* Floating toggle & Download for view mode */}
         <div className="fixed top-3 right-3 z-50 flex items-center gap-2">
+          <button
+            onClick={() => setIsDownloadModalOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-xs font-semibold text-white transition shadow-lg active:scale-95"
+            title="Direct Download and Install on iOS"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Install on iOS</span>
+          </button>
+
           <button
             onClick={() => setViewMode('iphone')}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/15 text-xs text-zinc-300 hover:text-white transition shadow-lg"
@@ -45,17 +54,36 @@ export const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ children }) => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-zinc-950 via-zinc-900 to-black py-4 sm:py-8 px-2 sm:px-4 flex flex-col items-center justify-center select-none">
       {/* Top Controls bar outside the iPhone */}
-      <div className="mb-3 flex items-center gap-3">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400">
+      <div className="mb-3 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>BitChord for iOS</span>
+          <span>BitChord iOS</span>
           <span className="text-zinc-600">•</span>
-          <span className="text-zinc-300 font-medium">iPhone 16 Pro Simulator</span>
+          <span className="text-zinc-300 font-medium">iPhone 16 Pro</span>
         </div>
+
+        {/* Direct Download & Install for iOS button */}
+        <button
+          onClick={() => setIsDownloadModalOpen(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-xs font-bold text-white transition shadow-md active:scale-95"
+          title="Direct Download & Install on iOS"
+        >
+          <Download className="w-3.5 h-3.5" />
+          <span>Download for iOS</span>
+        </button>
+
+        <button
+          onClick={() => setIsDownloadModalOpen(true)}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-xs text-zinc-300 hover:text-white transition"
+          title="GitHub Repository & Source"
+        >
+          <Github className="w-3.5 h-3.5" />
+          <span>GitHub</span>
+        </button>
 
         <button
           onClick={() => setViewMode('fullscreen')}
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-zinc-200 transition"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-zinc-200 transition"
           title="Switch to Fullscreen / Mobile Responsive view"
         >
           <Maximize2 className="w-3 h-3 text-pink-400" />
